@@ -43,3 +43,8 @@ guide part followed - <https://medium.com/codingmountain-blog/setting-up-jest-in
 7 - updated test file to use this axios client via 2 positive test cases ( POST a user and a GET a user).
 8 - created a data models file with a user model and data objects file with a user object that uses the user model to enforce the right shape - this allows for cleaner tests (both in setup and assertions)
 9 - tried to create negative test cases but was hitting an issue where axios was throwing errors a level up due to a none 200 response code - got help from claude on how to configure axios to not throw errors in the scenario - allowing the tests to assert on non 200 errors.
+
+## Steps to add reporting
+1 - installed https://www.npmjs.com/package/jest-html-reporters - potentially wouldnt on a major project due to it not looking that well supported (last updated 2 years ago and only from 1 source - Harry Hou)
+2 - configured jest to create this html report and open it automatically
+3 - added report files to .gitignore
