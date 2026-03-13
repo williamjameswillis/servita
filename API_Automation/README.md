@@ -53,3 +53,9 @@ guide part followed - <https://medium.com/codingmountain-blog/setting-up-jest-in
 1 - refined the user data model to fit what is actually returned in the responses for GET user and GET users (by page) and POST a user - i did this by adding console.log in a bunch of places to see what the response is then building up models accordingly
 2 - used these new models in assertions across the tests
 3 - renamed the test file for clarity now its no longer a trial to see if i can run jest locally or not
+
+## Steps to add CI execution of tests
+1 - Firstly i wasnt sure if this is possible on a free github account so i asked claude to do some research and it said that yes it is up to 2000minutes/month so i decided to setup CI execution of the tests
+2 - At the same time i asked this claude suggested some yaml so i went ahead and used the suggested yml file then refined it from there (to add things like saving the html report into the job artefacts to improve dev experience) 
+3 - also claude always seems to suggest old version of dependencies and github actions so bumped these to latest
+4 - pushed up to main to test it out - 
