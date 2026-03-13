@@ -10,7 +10,7 @@ axios - (why chose axios over fetch)
 
 guide part followed - <https://medium.com/codingmountain-blog/setting-up-jest-in-typescript-a-step-by-step-guide-baeac91f4b0a>
 
-## Steps
+## Steps to setup project
 
 1 - check which version of node i have installed globally - v25.6.0 (not quite latest).
 2 - Update node to latest with homebrew.
@@ -31,3 +31,15 @@ guide part followed - <https://medium.com/codingmountain-blog/setting-up-jest-in
 17 - had some configuration issues which claude helped me correct
 18 - trial.test.ts test passing
 19 - created initial commit for working jest + typescript + pushed up to github
+
+## Steps to get initial tests running against API endpoint
+
+1 - go to [API endpoint](https://reqres.in/) and create a public key and save it locally
+2 - create a .env file and add it to the .gitignore file so the key does not go into a commit/source control
+3 - add a new env var called API_KEY into the env file and enter the public key for it
+4 - install dotenv npm package so that we can use env files in node
+5 - create helpers.ts and create a simple axios client so we can call the api endpoint - this reads the API_KEY env var to make the connection.
+6 - at this point i remembered how much i rely on prettier so installed and configured prettier to run on save of file and created an extra npm script to run it on demand (or later in CI). - i got a bit of help from claude with the config of this with eslint + typescript.
+7 - updated test file to use this axios client via 2 positive test cases ( POST a user and a GET a user).
+8 - created a data models file with a user model and data objects file with a user object that uses the user model to enforce the right shape - this allows for cleaner tests (both in setup and assertions)
+9 - tried to create negative test cases but was hitting an issue where axios was throwing errors a level up due to a none 200 response code - got help from claude on how to configure axios to not throw errors in the scenario - allowing the tests to assert on non 200 errors.

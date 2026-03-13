@@ -1,8 +1,6 @@
 import { createDefaultPreset } from "ts-jest";
 
-const tsJestTransformCfg = createDefaultPreset({
-  tsconfig: { module: "CommonJS", moduleDetection: "auto" },
-}).transform;
+const tsJestTransformCfg = createDefaultPreset().transform;
 
 /** @type {import("jest").Config} */
 const config = {
