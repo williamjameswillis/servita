@@ -6,7 +6,7 @@ API endpoint - <https://reqres.in/>
 
 jest
 typescript
-axios - (why chose axios over fetch)
+axios - (explain why I chose axios over fetch)
 
 guide part followed - <https://medium.com/codingmountain-blog/setting-up-jest-in-typescript-a-step-by-step-guide-baeac91f4b0a>
 

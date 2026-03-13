@@ -1,5 +1,5 @@
 import { testUser } from "./dataObjects";
-import { apiClient } from "./helpers";
+import { apiClient, total_users, users_per_page } from "./helpers";
 import { UserModel } from "./dataModels";
 
 describe("positive tests", () => {
@@ -9,6 +9,8 @@ describe("positive tests", () => {
 
     console.log(response.data);
 
+    expect(response.data.name).toBe(testUser.name);
+    expect(response.data.role).toBe(testUser.role);
     expect(response.data).toMatchObject<UserModel>(testUser);
   });
 
@@ -34,6 +36,13 @@ describe("positive tests", () => {
     console.log(response.data);
 
     expect(response.data).toHaveProperty("page", pageNumber);
+    expect(response.data).toHaveProperty("per_page", users_per_page);
+    expect(response.data).toHaveProperty("total", total_users);
+    expect(response.data).toHaveProperty(
+      "total_pages",
+      Math.ceil(total_users / users_per_page),
+    );
+    expect(response.data.data).toHaveLength(users_per_page);
   });
 });
 
