@@ -3,16 +3,37 @@ import { apiClient } from "./helpers";
 import { UserModel } from "./dataModels";
 
 describe("positive tests", () => {
-  it("POST a user", async () => {
+  it("POST a user and validate the response", async () => {
     const response = await apiClient.post("users", testUser);
     expect(response.status).toBe(201);
+
+    console.log(response.data);
 
     expect(response.data).toMatchObject<UserModel>(testUser);
   });
 
-  it("GET users", async () => {
+  // test updated at
+
+  it("GET a known user and validate the response", async () => {
     const response = await apiClient.get(`users/2`);
     expect(response.status).toBe(200);
+
+    expect(response.data.data).toMatchObject<UserModel["data"]>({
+      email: expect.any(String),
+      first_name: expect.any(String),
+      last_name: expect.any(String),
+      id: expect.any(Number),
+    });
+  });
+
+  it("GET all users from page 2 and validate the response", async () => {
+    const pageNumber = 2;
+    const response = await apiClient.get(`users/?page=${pageNumber}`);
+    expect(response.status).toBe(200);
+
+    console.log(response.data);
+
+    expect(response.data).toHaveProperty("page", pageNumber);
   });
 });
 

@@ -45,6 +45,11 @@ guide part followed - <https://medium.com/codingmountain-blog/setting-up-jest-in
 9 - tried to create negative test cases but was hitting an issue where axios was throwing errors a level up due to a none 200 response code - got help from claude on how to configure axios to not throw errors in the scenario - allowing the tests to assert on non 200 errors.
 
 ## Steps to add reporting
-1 - installed https://www.npmjs.com/package/jest-html-reporters - potentially wouldnt on a major project due to it not looking that well supported (last updated 2 years ago and only from 1 source - Harry Hou)
+1 - installed https://www.npmjs.com/package/jest-html-reporters - potentially wouldnt on a major project due to it not looking that well supported (last updated 2 years ago and only from 1 source - Harry Hou) - though on the other side sockets security analysis seems positive - <https://socket.dev/npm/package/jest-html-reporters>
 2 - configured jest to create this html report and open it automatically
-3 - added report files to .gitignore
+3 - added report files to .gitignore to not pollute the repo
+
+## Steps to refine the api testing models
+1 - refined the user data model to fit what is actually returned in the responses for GET user and GET users (by page) and POST a user - i did this by adding console.log in a bunch of places to see what the response is then building up models accordingly
+2 - used these new models in assertions across the tests
+3 - renamed the test file for clarity now its no longer a trial to see if i can run jest locally or not
