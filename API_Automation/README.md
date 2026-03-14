@@ -58,4 +58,8 @@ guide part followed - <https://medium.com/codingmountain-blog/setting-up-jest-in
 1 - Firstly i wasnt sure if this is possible on a free github account so i asked claude to do some research and it said that yes it is up to 2000minutes/month so i decided to setup CI execution of the tests
 2 - At the same time i asked this claude suggested some yaml so i went ahead and used the suggested yml file then refined it from there (to add things like saving the html report into the job artefacts to improve dev experience) 
 3 - also claude always seems to suggest old version of dependencies and github actions so bumped these to latest
-4 - pushed up to main to test it out - 
+4 - pushed up to main to test it out - <https://github.com/williamjameswillis/servita/actions/runs/23063102863>
+5 - above failed due to lack of API_KEY which makes sense as i added that locally and then added that file to gitignnore - ill add the API_KEY to a github secret and retry
+6 - asked claude if i should do it as an Environment secret or Repository Secret - it suggested Repository Secret for simplicity so i went for that
+7 - i then asked claude how do i access it in my GH workflow as its always find that finikity
+8 - pushed that up to test it out again - <>
