@@ -62,4 +62,5 @@ guide part followed - <https://medium.com/codingmountain-blog/setting-up-jest-in
 5 - above failed due to lack of API_KEY which makes sense as i added that locally and then added that file to gitignnore - ill add the API_KEY to a github secret and retry
 6 - asked claude if i should do it as an Environment secret or Repository Secret - it suggested Repository Secret for simplicity so i went for that
 7 - i then asked claude how do i access it in my GH workflow as its always find that finikity
-8 - pushed that up to test it out again - <>
+8 - pushed that up to test it out again - <https://github.com/williamjameswillis/servita/actions/runs/23084215345/job/67058350798> - Passed - and test-results artefact surfaced in the summary correctly contains the desired html report
+9 - pushed up a change to one of my readmes to see the cache of node.js work as this took 7seconds (the longest step on the successful run) - <>
