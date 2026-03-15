@@ -6,6 +6,7 @@ export class BasePage {
   readonly shoppingCartLink: Locator;
   readonly pageTitle: Locator;
   readonly menuButton: Locator;
+  readonly inventoryContainer: Locator;
   readonly twitterLink: Locator;
   readonly facebookLink: Locator;
   readonly linkedInLink: Locator;
@@ -14,8 +15,9 @@ export class BasePage {
   constructor(page: Page) {
     this.page = page;
     this.shoppingCartLink = page.locator("[data-test='shopping-cart-link']");
-    this.menuButton = page.locator("[data-test='open-menu']");
+    this.menuButton = page.getByText("Open Menu");
     this.pageTitle = page.getByText("Swag Labs");
+    this.inventoryContainer = page.locator("[data-test='inventory-container']");
     this.twitterLink = page.locator("social-twitter");
     this.facebookLink = page.locator("social-facebook");
     this.linkedInLink = page.locator("social-linkedin");
@@ -34,6 +36,10 @@ export class BasePage {
     await expect(this.pageTitle).toBeVisible();
   }
 
+  async verifyInventoryContainerDisplayed() {
+    await expect(this.inventoryContainer).toBeVisible();
+  }
+
   async clickTwitterLink() {
     await clickElement(this.twitterLink);
   }
@@ -48,5 +54,19 @@ export class BasePage {
 
   async verifyFooterDisplayed() {
     await expect(this.footer).toBeVisible();
+  }
+
+  async verifySessionCookieExists(username: string) {
+    const cookies = await this.page.context().cookies();
+    const session = cookies.find(
+      (c) => c.name === "session-username" && c.value === username,
+    );
+    expect(session).toBeDefined();
+  }
+
+  async verifySessionCookieCleared() {
+    const cookies = await this.page.context().cookies();
+    const session = cookies.find((c) => c.name === "session-username");
+    expect(session).toBeUndefined();
   }
 }

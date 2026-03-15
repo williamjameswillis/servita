@@ -1,6 +1,6 @@
 import "dotenv/config";
 
-const password = process.env["DEFAULT_PASSWORD"];
+const password = process.env["DEFAULT_PASSWORD"] || "";
 
 export const loginCredentials = {
   standardUser: {

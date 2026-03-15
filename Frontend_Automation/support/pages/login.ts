@@ -1,14 +1,15 @@
 import { expect, type Locator, type Page } from "@playwright/test";
+import { fillInput } from "../helpers";
+import { BasePage } from "./base";
 
-export class LoginPage {
-  readonly page: Page;
+export class LoginPage extends BasePage {
   readonly loginContainer: Locator;
   readonly usernameInput: Locator;
   readonly passwordInput: Locator;
   readonly loginButton: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
 
     this.loginContainer = page.locator("[data-test='login-container']");
     this.usernameInput = page.locator("[data-test='username']");
@@ -16,7 +17,23 @@ export class LoginPage {
     this.loginButton = page.locator("[data-test='login-button']");
   }
 
+  async goToLoginPage() {
+    await this.page.goto("/");
+  }
+
   async verifyLoginContainerDisplayed() {
     await expect(this.loginContainer).toBeVisible();
+  }
+
+  async enterUsername(username: string) {
+    await fillInput(this.usernameInput, username);
+  }
+
+  async enterPassword(password: string) {
+    await fillInput(this.passwordInput, password);
+  }
+
+  async clickLoginButton() {
+    await this.loginButton.click();
   }
 }
