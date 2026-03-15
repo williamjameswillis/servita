@@ -1,4 +1,4 @@
-# Frontend Automation
+# Frontend Automation§
 
 ## Steps to setup project
 
@@ -47,10 +47,27 @@ The one thing worth sharing: linting/formatting config (eslint.config.mjs, .pret
 4 - I liked the look of the claude suggestion so pushed up again here <https://github.com/williamjameswillis/servita/actions/runs/23111222856/job/67128891259> this still took 26 seconds as it was the first run with cache so pushed up again here to see it use the cache correctly <https://github.com/williamjameswillis/servita/actions/runs/23111252935/job/67128975597> which it did work correctly however slightly disappointingly only cut the step down to 22 seconds
 5 - checked that the test artefacts were saved out correctly and they were
 
-## Steps to extend `trial.test.ts` file to cover full functionality of target application
+## Steps to extend `trial.test.ts` file to cover required functionality of target application
+
+1 - reviewed set exercise and the target application and decided a industry best practice Page Object Model approach would work best. this approach is maintainable and easy to extend - each of the 3 flows requested to be automated can reuse functions that only need to be maintained in one place. POM also allows us to use  class inheritance which fits the target applications behavior nicely ie the always visible cart and burger menu can be on a base object page that specific pages like inventory can inherit.
+2 - also decided to have three test files, one for each flow for readability
+3 - inspected the target application with dev tools and found a lot of ui elements have data-test attributes allowing for accurate and stable interaction - decided on selector strategy as follows: use data-test primarily and fall back to displayed text then fallback to html ids
+4 - built a basePage object first - used <https://playwright.dev/docs/pom> as a starting point/refresher 
+5 - then built inventoryPage to inherit basePage - this is to bake in the structure early. Of note is that i was going to call this page the homePage as its the one a user lands on in happy path after login however i decided not to as the page is named inventory - so for ease of maintenance and readability i think it works better to match the actual page names
+6 - i wanted to create a type for ProductSortOption to scope the options that could be passed to clickProductSortDropdownOption but couldn't quite remember/get it right so got help from claude on implementing this.
+7 - now that i have the start of a basePage and inventoryPage (essentially the homepage) i decided to create the loginPage - once this in place i should be able to start fleshing out UI flow 1 from the exercise
+8 - i built a loginCredentials.ts file to store the login credentials displayed on the login page, i did consider getting these at run time so that if they change it handles it, however though that the overhead of doing this wasn't worth it + the code is more readable and maintainable storing them. Of note that the ai auto type on this object somehow knew all the options so expect the training data for the LLM model knows all about this saucedemo
+9 - i had to add the dotenv package into this directory to store the password locally + a github secret for in CI - for the usernames - although its displayed in plaintext on the website i wanted to follow best practice and manage it as a secret.
+10 - updated `.gitignore` so that the `.env` is not added to source control.
+11 - pushed this up as needed to walk the dog and didn't want to lose my work locally `:)`
+
+10 - decided to use Playwright session in flows 2 and 3  - this way we still test the login flow fully in flow 1 but don't have to go through the flow for each test - which would add a lot of overhead - article partly followed <https://medium.com/@Gayathri_krish/mastering-persistent-sessions-in-playwright-keep-your-logins-alive-8e4e0fd52751>
+
+## Steps to add Visual Regression testing
 
 ## Steps to add NFT:accessibility
 
 ## Steps to add NFT:Performance testing
 
 ## Steps to add NFT:Security testing
+

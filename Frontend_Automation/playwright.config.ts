@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const isCI = !!process.env["CI"];
-const baseURL = "https://www.saucedemo.com";
+export const baseURL = "https://www.saucedemo.com";
 
 const baseProject = { name: "chromium", use: { ...devices["Desktop Chrome"] } };
 const projectsToRun = isCI
