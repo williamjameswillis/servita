@@ -44,7 +44,8 @@ The one thing worth sharing: linting/formatting config (eslint.config.mjs, .pret
 1 - As the flow for running the E2E tests is very similar I cloned the existing api-tests.yml file and renamed as appropriate
 2 - I pushed that up to see if it worked <https://github.com/williamjameswillis/servita/actions/runs/23111096696/job/67128555319> it failed as i havent installed the chromium browser inside the CI runner
 3 - added installation of the chromium browser and pushed again <https://github.com/williamjameswillis/servita/actions/runs/23111162844/job/67128724387> - this worked but downloading chromium took 24 seconds so asked claude how best to add this to the caching approach
-4 - I liked the look of the claude suggestion so pushed up again here <>
+4 - I liked the look of the claude suggestion so pushed up again here <> this still took 26 seconds as it was the first run with cache so pushed up again here to see it use the cache correctly <> which it did
+5 - checked that the test artefacts were saved out correctly and they were
 
 ## Steps to extend `trial.test.ts` file to cover full functionality of target application
 
