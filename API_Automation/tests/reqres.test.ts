@@ -1,6 +1,6 @@
-import { testUser } from "./dataObjects";
-import { apiClient, total_users, users_per_page } from "./helpers";
-import { UserModel } from "./dataModels";
+import { testUser } from "../support/dataObjects";
+import { apiClient, total_users, users_per_page } from "../support/helpers";
+import { UserModel } from "../support/dataModels";
 
 describe("positive tests", () => {
   it("POST a user and validate the response", async () => {

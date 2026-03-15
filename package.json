@@ -1,0 +1,19 @@
+{
+  "name": "servita",
+  "private": true,
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.0.3",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "prettier": "3.8.1",
+    "typescript-eslint": "^8.57.0"
+  },
+  "scripts": {
+    "test:api": "npm test --prefix API_Automation",
+    "test:e2e": "npm test --prefix Frontend_Automation",
+    "lint": "npm run lint --prefix API_Automation && npm run lint --prefix Frontend_Automation",
+    "typecheck": "npm run typecheck --prefix API_Automation && npm run typecheck --prefix Frontend_Automation",
+    "format": "npm run format --prefix API_Automation && npm run format --prefix Frontend_Automation"
+  }
+}

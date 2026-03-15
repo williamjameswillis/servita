@@ -10,4 +10,4 @@ See [Frontend_Automation/README.md](Frontend_Automation/README.md)
 
 ## part 2 - API Automation
 
-See [API_Automation/README.md](API_Automation/README.md) 
+See [API_Automation/README.md](API_Automation/README.md)

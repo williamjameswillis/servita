@@ -19,7 +19,7 @@ for the following reasons:
 - Different runtimes/runners — Jest and Playwright have overlapping but distinct dependency trees (e.g. ts-jest is irrelevant to Playwright; Playwright has its own browser binaries and @playwright/test types). Mixing them creates noise and version conflict risk.
 - Different configs — jest.config.js, playwright.config.ts, tsconfig.json settings often need to be tuned differently per suite. Sharing a root makes this messy.
 - Different execution contexts — API tests likely run in CI headlessly and quickly; E2E Playwright tests need browser installs (npx playwright install). Isolating them lets you install/run only what you need per CI job.
-- The duplication is minimal — the overlap is really just typescript, eslint, prettier, and dotenv. That's not expensive to repeat.
+- The duplication is minimal — the overlap is really just typescript, eslint, prettier. That's not expensive to repeat.
 ```
 
 claude did note that:
@@ -28,4 +28,12 @@ claude did note that:
 The one thing worth sharing: linting/formatting config (eslint.config.mjs, .prettierrc) can reasonably live at the root and be referenced by both suites, avoiding true duplication of rules without merging dependency trees.
 ```
 
-2 - I then asked claude to reorganise the project as suggested and then test it by running the existing API tests via the npm test script
+2 - I then asked claude to reorganise the project as suggested and then test it by running the existing API tests via the npm test script.
+3 - had to cleanup/improve its work as follows:
+- as it added unneeded packages at this level (`dotenv`, `@eslint/js`, `eslint-config-prettier`, `eslint-plugin-prettier`, `typescript-eslint` ).
+- it didn't configure playwright well (ie for local vs CI and cross browser was limited).
+- auto formatting (ie prettier) wasn't working on save of file in my IDE any longer so had to fix that in the vscode settings.json then test it out from top level and from both test directories.
+- i needed to add and configure new `.gitignore` files for top level and Frontend_Automation.
+
+4 - i added a simple `trial.test.ts` file to test out the playwright configuration ie that it would run locally with the top level `npm run test:e2e` script + also checked the top level `npm run test:api` command worked
+5 - tested out the npm commands in the Frontend_Automation `package.json` file that claude added to make sure they all work with the trial test

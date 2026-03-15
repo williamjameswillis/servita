@@ -1,0 +1,9 @@
+import { test, expect } from "@playwright/test";
+
+test.describe("trial test", () => {
+  test("page loads", async ({ page }) => {
+    await page.goto("/");
+
+    await expect(page).toHaveTitle(/Swag Labs/);
+  });
+});

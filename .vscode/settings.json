@@ -1,5 +1,9 @@
 {
     "eslint.enable": true,
+    "eslint.workingDirectories": [
+        { "directory": "API_Automation", "changeProcessCWD": true },
+        { "directory": "Frontend_Automation", "changeProcessCWD": true }
+    ],
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit"
     },
