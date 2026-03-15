@@ -67,7 +67,7 @@ The one thing worth sharing: linting/formatting config (eslint.config.mjs, .pret
 16 - i wasnt satisfied with just checking the UI - and since i cannot check a DB backend i decided to add a check of the logged in session cookie once logged in + check its cleared by logout - followed <https://www.browserstack.com/guide/playwright-cookies>
 17 - ran into an issue with clicking the menu button - the data-test attribute wasnt working as it seemed to be trying to click an image so i switched to getting it by its `Open Menu` text instead and that did the trick
 18 - pushed that up to see if it works in CI <https://github.com/williamjameswillis/servita/actions/runs/23119556807/job/67151002296> - it failed due to not successfully logging in - it was useful at this point to see the retry strategy i had configured working 
-19 - it failed as i forgot to pass the github secret for the password through to the test so fixed that and re-pushed <>
+19 - i consulted the test aretfacts and it was immediately apparent that it had failed as i forgot to pass the github secret for the password through to the test - so i fixed that and re-pushed <https://github.com/williamjameswillis/servita/actions/runs/23119629526> - this passed - though i noticed from a github warning that i wasnt using the latest actions/cache@v version so i bumped that to latest and repushed
 
 10 - decided to use Playwright session in flows 2 and 3  - this way we still test the login flow fully in flow 1 but don't have to go through the flow for each test - which would add a lot of overhead - article partly followed <https://medium.com/@Gayathri_krish/mastering-persistent-sessions-in-playwright-keep-your-logins-alive-8e4e0fd52751>
 
