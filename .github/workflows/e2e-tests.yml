@@ -35,6 +35,8 @@ jobs:
 
       - name: Run tests
         run: npm run test
+        env:
+          DEFAULT_PASSWORD: ${{ secrets.DEFAULT_PASSWORD }}
 
       - name: Upload test results
         if: always()
