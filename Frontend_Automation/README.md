@@ -37,3 +37,17 @@ The one thing worth sharing: linting/formatting config (eslint.config.mjs, .pret
 
 4 - i added a simple `trial.test.ts` file to test out the playwright configuration ie that it would run locally with the top level `npm run test:e2e` script + also checked the top level `npm run test:api` command worked
 5 - tested out the npm commands in the Frontend_Automation `package.json` file that claude added to make sure they all work with the trial test
+6 - <https://github.com/williamjameswillis/servita/actions/runs/23108438066> pushed that up and checked API tests still passing in CI
+
+## Steps to add CI execution
+
+1 - As the flow for running the E2E tests is very similar I cloned the existing api-tests.yml file and renamed as appropriate
+2 - I pushed that up to see if it worked <>
+
+## Steps to extend `trial.test.ts` file to cover full functionality of target application
+
+## Steps to add NFT:accessibility
+
+## Steps to add NFT:Performance testing
+
+## Steps to add NFT:Security testing
