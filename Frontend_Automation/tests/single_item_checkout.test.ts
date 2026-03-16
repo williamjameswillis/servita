@@ -16,6 +16,7 @@ test.describe("Single Item Checkout - ", () => {
       {
         code: "sauce-labs-backpack",
         name: "Sauce Labs Backpack",
+        price: 29.99,
       },
     ];
 
@@ -52,7 +53,10 @@ test.describe("Single Item Checkout - ", () => {
     await checkoutStepTwoPage.verifyCheckoutTitleDisplayed();
     await checkoutStepTwoPage.verifyCartItemsCount(1);
     await checkoutStepTwoPage.verifyCartContainsItem(products);
-    // maybe add verify of price + delivery price and total price here as well?
+    await checkoutStepTwoPage.verifySubtotal(products);
+    await checkoutStepTwoPage.verifyTax(products);
+    await checkoutStepTwoPage.verifyTotal(products);
+
     await checkoutStepTwoPage.clickFinishButton();
 
     await checkoutCompletePage.verifyCheckoutCompleteTitleDisplayed();

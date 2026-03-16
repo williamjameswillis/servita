@@ -16,10 +16,12 @@ test.describe("Multi Item Checkout - ", () => {
       {
         code: "sauce-labs-backpack",
         name: "Sauce Labs Backpack",
+        price: 29.99,
       },
       {
         code: "sauce-labs-bike-light",
         name: "Sauce Labs Bike Light",
+        price: 9.99,
       },
     ];
 
@@ -56,7 +58,10 @@ test.describe("Multi Item Checkout - ", () => {
     await checkoutStepTwoPage.verifyCheckoutTitleDisplayed();
     await checkoutStepTwoPage.verifyCartItemsCount(2);
     await checkoutStepTwoPage.verifyCartContainsItem(products);
-    // maybe add verify of price + delivery price and total price here as well?
+    await checkoutStepTwoPage.verifySubtotal(products);
+    await checkoutStepTwoPage.verifyTax(products);
+    await checkoutStepTwoPage.verifyTotal(products);
+
     await checkoutStepTwoPage.clickFinishButton();
 
     await checkoutCompletePage.verifyCheckoutCompleteTitleDisplayed();
