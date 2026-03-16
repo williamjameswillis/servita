@@ -1,6 +1,6 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import { clickElement, selectOption } from "../helpers";
-import { ProductSortOption } from "../models";
+import { ProductModel, ProductSortOption } from "../models";
 import { BasePage } from "./base";
 
 export class InventoryPage extends BasePage {
@@ -58,12 +58,14 @@ export class InventoryPage extends BasePage {
     await selectOption(this.productSortDropdown, ProductSortOption[option]);
   }
 
-  async clickAddToCartButtonFor(productName: string) {
-    const addToCartLocator = this.page.locator(
-      `[data-test='add-to-cart-${productName}']`,
-    );
+  async clickAddToCartButtonFor(products: ProductModel[]) {
+    for (const product of products) {
+      const addToCartLocator = this.page.locator(
+        `[data-test='add-to-cart-${product.code}']`,
+      );
 
-    await clickElement(addToCartLocator);
+      await clickElement(addToCartLocator);
+    }
   }
 
   /**

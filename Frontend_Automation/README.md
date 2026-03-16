@@ -84,6 +84,11 @@ The one thing worth sharing: linting/formatting config (eslint.config.mjs, .pret
 2 - made a start on `single_item_checkout.test.ts` and pushed that up as needed a break <https://github.com/williamjameswillis/servita/actions/runs/23149908061/job/67248467386> - this failed as i had forgot to remove the .only on the test `:)` - i am retrospectively claiming that this was actually a test of the playwright config `forbidOnly: isCI,` line `:)`
 3 - when i was building up this test i was running the full suite locally as i went to detect any rare flakes - i did encounter one with the visual_user test in the login and logout flow - the DOM snapshots were not always matching so i asked claude what it thought and it suggested adding a wait for the network to be idle before performing the assertion and this seemed to help
 4 - decided to use faker to create my checkout data - probably overkill but its such a nice library and it meets the 'random' data requirement specified `:)`
+5 - building out the rest of flow 2 was reasonably simple - pushed up it 95% of the way there here <https://github.com/williamjameswillis/servita/actions/runs/23158769208/job/67280587918> passed
+
+### 2. Multi Item Checkout
+
+1 - this flow was very similar to the Single Item checkout - the complexity came from having to alter the verifyCartContainsItem and clickAddToCartButtonFor functions to be able to take more than one product at a time - to do this i added a new model for products and imported it into the single and multi tests and created the data to fit in the models.
 
 ## Steps to add Visual Regression testing
 

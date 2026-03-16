@@ -1,6 +1,7 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import { BasePage } from "./base";
 import { clickElement } from "../helpers";
+import { ProductModel } from "../models";
 
 export class CheckoutStepTwoPage extends BasePage {
   readonly checkoutTitle: Locator;
@@ -24,15 +25,19 @@ export class CheckoutStepTwoPage extends BasePage {
   }
 
   async clickFinishButton() {
-    clickElement(this.finishButton);
+    await clickElement(this.finishButton);
   }
 
   async verifyCartItemsCount(expectedCount: number) {
-    await expect(this.cartItemsCount).toHaveText(expectedCount.toString());
+    await expect(this.cartItemsCount).toHaveCount(expectedCount);
   }
 
-  async verifyCartContainsItem(itemName: string) {
-    const cartItemName = this.page.locator(`[data-test='inventory-item-name']`);
-    await expect(cartItemName).toHaveText(itemName);
+  async verifyCartContainsItem(products: ProductModel[]) {
+    for (const [index, product] of products.entries()) {
+      const cartItemName = this.page
+        .locator(`[data-test='inventory-item-name']`)
+        .nth(index);
+      await expect(cartItemName).toHaveText(product.name);
+    }
   }
 }

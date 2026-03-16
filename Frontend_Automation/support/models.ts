@@ -6,3 +6,8 @@ export const ProductSortOption = {
 } as const;
 
 export type ProductSortOption = keyof typeof ProductSortOption;
+
+export interface ProductModel {
+  code: string;
+  name: string;
+}

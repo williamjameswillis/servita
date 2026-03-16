@@ -3,8 +3,8 @@ import { loginCredentials } from "../support/loginCredentials";
 import { ProductModel } from "../support/models";
 import { createCheckOutInformation } from "../support/testDataFactory";
 
-test.describe("Single Item Checkout - ", () => {
-  test("login as standard_user then add a single item to the cart and checkout", async ({
+test.describe("Multi Item Checkout - ", () => {
+  test("login as standard_user then add multiple items to the cart and checkout", async ({
     loginPage,
     inventoryPage,
     cartPage,
@@ -16,6 +16,10 @@ test.describe("Single Item Checkout - ", () => {
       {
         code: "sauce-labs-backpack",
         name: "Sauce Labs Backpack",
+      },
+      {
+        code: "sauce-labs-bike-light",
+        name: "Sauce Labs Bike Light",
       },
     ];
 
@@ -34,11 +38,11 @@ test.describe("Single Item Checkout - ", () => {
     );
 
     await inventoryPage.clickAddToCartButtonFor(products);
-    await inventoryPage.verifyCartBadgeCount(1, true);
+    await inventoryPage.verifyCartBadgeCount(2, true);
     await inventoryPage.clickCart();
 
     await cartPage.verifyCartTitleDisplayed();
-    await cartPage.verifyCartItemsCount(1);
+    await cartPage.verifyCartItemsCount(2);
     await cartPage.verifyCartContainsItem(products);
     await cartPage.clickCheckoutButton();
 
@@ -50,7 +54,7 @@ test.describe("Single Item Checkout - ", () => {
     await checkoutStepOnePage.clickContinueButton();
 
     await checkoutStepTwoPage.verifyCheckoutTitleDisplayed();
-    await checkoutStepTwoPage.verifyCartItemsCount(1);
+    await checkoutStepTwoPage.verifyCartItemsCount(2);
     await checkoutStepTwoPage.verifyCartContainsItem(products);
     // maybe add verify of price + delivery price and total price here as well?
     await checkoutStepTwoPage.clickFinishButton();
