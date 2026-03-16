@@ -58,12 +58,17 @@ export class InventoryPage extends BasePage {
     await selectOption(this.productSortDropdown, ProductSortOption[option]);
   }
 
+  /**
+   * Clicks the "Add to cart" button for every product on the inventory page.
+   * Captures the initial button count upfront, then clicks `.first()` on each
+   * iteration — since each click replaces the button with "Remove", using
+   * `.first()` always targets the next remaining button rather than a stale index.
+   */
   async clickAddToCartButtonForAllProducts() {
-    const addToCartButtons = this.page
-      .locator("[data-test^='add-to-cart-']")
-      .all();
-    for (const button of await addToCartButtons) {
-      await button.click();
+    const addToCartLocator = this.page.locator("[data-test^='add-to-cart-']");
+    const count = await addToCartLocator.count();
+    for (let i = 0; i < count; i++) {
+      await addToCartLocator.first().click();
     }
   }
 }

@@ -11,6 +11,7 @@ export class BasePage {
   readonly facebookLink: Locator;
   readonly linkedInLink: Locator;
   readonly footer: Locator;
+  readonly fullPage: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -22,12 +23,21 @@ export class BasePage {
     this.facebookLink = page.locator("social-facebook");
     this.linkedInLink = page.locator("social-linkedin");
     this.footer = page.locator("footer-copy");
+    this.fullPage = page.locator("html");
   }
 
   async clickCart() {
     await clickElement(this.shoppingCartLink);
   }
 
+  /**
+   * Asserts the shopping cart badge count against an expected value.
+   *
+   * @param expectedCount - The number to compare the cart badge text against.
+   * @param expectCountToMatch - Pass `true` to assert the badge shows exactly
+   *   `expectedCount`, or `false` to assert it does not (e.g. error_user where
+   *   add-to-cart buttons fail silently and the count should not update).
+   */
   async verifyCartBadgeCount(
     expectedCount: number,
     expectCountToMatch: boolean,
@@ -100,5 +110,15 @@ export class BasePage {
       elapsed,
       `Expected navigation to exceed ${thresholdMs}ms but completed in ${Math.round(elapsed)}ms`,
     ).toBeGreaterThan(thresholdMs);
+  }
+
+  async waitForPageError(errorMessage: string): Promise<void> {
+    await this.page.waitForEvent("pageerror", (error) =>
+      error.message.includes(errorMessage),
+    );
+  }
+
+  async checkUIMatchesSnapshot() {
+    await expect(this.fullPage).toMatchAriaSnapshot();
   }
 }

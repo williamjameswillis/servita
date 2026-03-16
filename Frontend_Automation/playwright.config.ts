@@ -1,7 +1,9 @@
 import { defineConfig, devices } from "@playwright/test";
+import { cpus } from "os";
 
 const isCI = !!process.env["CI"];
 const baseURL = "https://www.saucedemo.com";
+const localWorkers = Math.max(1, Math.floor(cpus().length * 0.5));
 
 const baseProject = { name: "chromium", use: { ...devices["Desktop Chrome"] } };
 const projectsToRun = isCI
@@ -16,10 +18,11 @@ const projectsToRun = isCI
 
 export default defineConfig({
   testDir: "./tests",
+  snapshotPathTemplate: "{testDir}/snapshots/{projectName}/{arg}{ext}",
   fullyParallel: true,
   forbidOnly: isCI,
   retries: isCI ? 2 : 0,
-  workers: isCI ? 1 : 2,
+  workers: isCI ? 1 : localWorkers,
   reporter: [
     ["html", { outputFolder: "html-report", open: isCI ? "never" : "always" }],
   ],
