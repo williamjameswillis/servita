@@ -4,7 +4,8 @@ import { BasePage } from "./base";
 export class CartPage extends BasePage {
   readonly cartTitle: Locator;
   readonly cartItemsCount: Locator;
-  checkoutButton: Locator;
+  readonly checkoutButton: Locator;
+  readonly cartItemName: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -14,6 +15,7 @@ export class CartPage extends BasePage {
       .and(page.getByText("Your Cart"));
     this.cartItemsCount = page.locator("[data-test='item-quantity']");
     this.checkoutButton = page.locator("[data-test='checkout']");
+    this.cartItemName = page.locator("[data-test='inventory-item-name']");
   }
 
   async verifyCartTitleDisplayed() {
@@ -24,11 +26,20 @@ export class CartPage extends BasePage {
     await expect(this.cartItemsCount).toHaveText(expectedCount.toString());
   }
 
-  async verifyCartContainsItem(itemName: string) {
+  async verifyCartContainsItem(itemCode: string, itemName: string) {
     const cartItemRemoveButton = this.page.locator(
-      `[data-test='remove-${itemName}']`,
+      `[data-test='remove-${itemCode}']`,
     );
     await expect(cartItemRemoveButton).toBeVisible();
+    const cartItemName = this.page.locator(`[data-test='inventory-item-name']`);
+    await expect(cartItemName).toHaveText(itemName);
+  }
+
+  async clickRemoveItem(itemCode: string) {
+    const cartItemRemoveButton = this.page.locator(
+      `[data-test='remove-${itemCode}']`,
+    );
+    await cartItemRemoveButton.click();
   }
 
   async clickCheckoutButton() {

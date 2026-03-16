@@ -5,6 +5,7 @@ import { InventoryPage } from "./pages/inventory";
 import { CartPage } from "./pages/cart";
 import { CheckoutStepOnePage } from "./pages/checkoutStepOne";
 import { CheckoutStepTwoPage } from "./pages/checkoutStepTwo";
+import { CheckoutCompletePage } from "./pages/checkoutComplete";
 
 interface Pages {
   loginPage: LoginPage;
@@ -13,6 +14,7 @@ interface Pages {
   cartPage: CartPage;
   checkoutStepOnePage: CheckoutStepOnePage;
   checkoutStepTwoPage: CheckoutStepTwoPage;
+  checkoutCompletePage: CheckoutCompletePage;
 }
 
 export const test = base.extend<Pages>({
@@ -33,6 +35,9 @@ export const test = base.extend<Pages>({
   },
   checkoutStepTwoPage: async ({ page }, use) => {
     await use(new CheckoutStepTwoPage(page));
+  },
+  checkoutCompletePage: async ({ page }, use) => {
+    await use(new CheckoutCompletePage(page));
   },
 });
 

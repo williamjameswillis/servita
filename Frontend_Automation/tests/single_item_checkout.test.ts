@@ -3,14 +3,18 @@ import { loginCredentials } from "../support/loginCredentials";
 import { createCheckOutInformation } from "../support/testDataFactory";
 
 test.describe("Single Item Checkout - ", () => {
-  test.only("login as standard_user then add a single item to the cart and checkout then logout", async ({
+  test("login as standard_user then add a single item to the cart and checkout then logout", async ({
     loginPage,
     inventoryPage,
     cartPage,
     checkoutStepOnePage,
     checkoutStepTwoPage,
+    checkoutCompletePage,
   }) => {
-    const productCode = "sauce-labs-backpack";
+    const product = {
+      code: "sauce-labs-backpack",
+      name: "Sauce Labs Backpack",
+    };
 
     await loginPage.goToLoginPage();
     await loginPage.verifyLoginContainerDisplayed();
@@ -26,13 +30,13 @@ test.describe("Single Item Checkout - ", () => {
       loginCredentials.standardUser.username,
     );
 
-    await inventoryPage.clickAddToCartButtonFor(productCode);
+    await inventoryPage.clickAddToCartButtonFor(product.code);
     await inventoryPage.verifyCartBadgeCount(1, true);
     await inventoryPage.clickCart();
 
     await cartPage.verifyCartTitleDisplayed();
     await cartPage.verifyCartItemsCount(1);
-    await cartPage.verifyCartContainsItem(productCode);
+    await cartPage.verifyCartContainsItem(product.code, product.name);
     await cartPage.clickCheckoutButton();
 
     await checkoutStepOnePage.verifyCheckoutTitleDisplayed();
@@ -43,9 +47,16 @@ test.describe("Single Item Checkout - ", () => {
     await checkoutStepOnePage.clickContinueButton();
 
     await checkoutStepTwoPage.verifyCheckoutTitleDisplayed();
-    // verify
+    await checkoutStepTwoPage.verifyCartItemsCount(1);
+    await checkoutStepTwoPage.verifyCartContainsItem(product.name);
+    // maybe add verify of price + delivery price and total price here as well?
     await checkoutStepTwoPage.clickFinishButton();
 
-    // verify checkout complete page
+    await checkoutCompletePage.verifyCheckoutCompleteTitleDisplayed();
+    await checkoutCompletePage.verifyCheckoutCompleteMessageDisplayed();
+    await checkoutCompletePage.clickBackHomeButton();
+
+    await inventoryPage.verifyProductsTitleDisplayed();
+    await inventoryPage.verifyInventoryContainerDisplayed();
   });
 });
