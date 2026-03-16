@@ -49,6 +49,8 @@ The one thing worth sharing: linting/formatting config (eslint.config.mjs, .pret
 
 ## Steps to extend `trial.test.ts` file to cover required functionality of target application
 
+### 1. Login and Logout flows
+
 1 - reviewed set exercise and the target application and decided a industry best practice Page Object Model approach would work best. this approach is maintainable and easy to extend - each of the 3 flows requested to be automated can reuse functions that only need to be maintained in one place. POM also allows us to use  class inheritance which fits the target applications behavior nicely ie the always visible cart and burger menu can be on a base object page that specific pages like inventory can inherit.
 2 - also decided to have three test files, one for each flow for readability
 3 - inspected the target application with dev tools and found a lot of ui elements have data-test attributes allowing for accurate and stable interaction - decided on selector strategy as follows: use data-test primarily and fall back to displayed text then fallback to html ids
@@ -74,11 +76,16 @@ The one thing worth sharing: linting/formatting config (eslint.config.mjs, .pret
 23 - of note when i was creating the error_user test i tried to use .all() on the locator for data-test^='add-to-cart-' but that was failing due to the UI change of the button - claude helped me with a rewrite
 24 - i wanted to explicity check for an error to be thrown in the browser console so read up <https://playwright.dev/docs/api/class-consolemessage> and function in basePage to listen and assert for console errors - also consulted claude here as i couldn't get the event to be detected because i was waiting for a console message when i should have been waiting for pageerror
 25 - for the visual user test where the UI has the regression of the shopping cart being in the wrong place i considered using either screenshot testing (images + pixels) or snapshot testing (DOM structure) - given previous experience with screenshot testing + the larger overhead i decided to try DOM snapshot testing first. This went fine except the fact ARIA snapshots can differ across browsers when text nodes are structured differently - so i needed to configure specific snapshots on a per browser basis in the `playwright.config.ts` file using snapshotPathTemplate
-26 - got all these tests passing locally and pushed up to see CI behaviour <>
+26 - got all these tests passing locally and pushed up to see CI behaviour <https://github.com/williamjameswillis/servita/actions/runs/23148633839> this passed 
 
-10 - decided to use Playwright session in flows 2 and 3  - this way we still test the login flow fully in flow 1 but don't have to go through the flow for each test - which would add a lot of overhead - article partly followed <https://medium.com/@Gayathri_krish/mastering-persistent-sessions-in-playwright-keep-your-logins-alive-8e4e0fd52751>
+### 2. Single Item Checkout
+
+1 - firstly i decided to use Playwright session in flows 2 and 3  - this way we still test the login+logout flow fully but don't have the overhead of having to go through the login flow for each test - article partly followed <https://medium.com/@Gayathri_krish/mastering-persistent-sessions-in-playwright-keep-your-logins-alive-8e4e0fd52751>
+2 - 
 
 ## Steps to add Visual Regression testing
+
+Decided against this as used DOM snapshots already.
 
 ## Steps to add NFT:accessibility
 
