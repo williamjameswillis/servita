@@ -118,7 +118,17 @@ export class BasePage {
     );
   }
 
+  /**
+   * Waits for the page to reach network idle, then asserts the full page ARIA
+   * snapshot matches the stored baseline. On first run the snapshot is written
+   * automatically; subsequent runs compare against it.
+   *
+   * Snapshots are stored per project (see `snapshotPathTemplate` in
+   * `playwright.config.ts`) so each browser/viewport has its own baseline.
+   * Delete the snapshot file and re-run to regenerate it.
+   */
   async checkUIMatchesSnapshot() {
+    await this.page.waitForLoadState("networkidle");
     await expect(this.fullPage).toMatchAriaSnapshot();
   }
 }

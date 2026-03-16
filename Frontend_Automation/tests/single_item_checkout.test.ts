@@ -1,13 +1,16 @@
 import { test } from "../support/fixtures";
 import { loginCredentials } from "../support/loginCredentials";
+import { createCheckOutInformation } from "../support/testDataFactory";
 
 test.describe("Single Item Checkout - ", () => {
   test.only("login as standard_user then add a single item to the cart and checkout then logout", async ({
     loginPage,
     inventoryPage,
     cartPage,
+    checkoutStepOnePage,
+    checkoutStepTwoPage,
   }) => {
-    const productName = "sauce-labs-backpack";
+    const productCode = "sauce-labs-backpack";
 
     await loginPage.goToLoginPage();
     await loginPage.verifyLoginContainerDisplayed();
@@ -23,10 +26,26 @@ test.describe("Single Item Checkout - ", () => {
       loginCredentials.standardUser.username,
     );
 
-    await inventoryPage.clickAddToCartButtonFor(productName);
+    await inventoryPage.clickAddToCartButtonFor(productCode);
     await inventoryPage.verifyCartBadgeCount(1, true);
     await inventoryPage.clickCart();
 
     await cartPage.verifyCartTitleDisplayed();
+    await cartPage.verifyCartItemsCount(1);
+    await cartPage.verifyCartContainsItem(productCode);
+    await cartPage.clickCheckoutButton();
+
+    await checkoutStepOnePage.verifyCheckoutTitleDisplayed();
+    const checkOutInfo = createCheckOutInformation();
+    await checkoutStepOnePage.enterFirstName(checkOutInfo.firstName);
+    await checkoutStepOnePage.enterLastName(checkOutInfo.lastName);
+    await checkoutStepOnePage.enterPostalCode(checkOutInfo.postCode);
+    await checkoutStepOnePage.clickContinueButton();
+
+    await checkoutStepTwoPage.verifyCheckoutTitleDisplayed();
+    // verify
+    await checkoutStepTwoPage.clickFinishButton();
+
+    // verify checkout complete page
   });
 });

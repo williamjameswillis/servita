@@ -1,5 +1,5 @@
 import { expect, type Locator, type Page } from "@playwright/test";
-import { fillInput } from "../helpers";
+import { fillInput, clickElement } from "../helpers";
 import { BasePage } from "./base";
 
 export class LoginPage extends BasePage {
@@ -36,7 +36,7 @@ export class LoginPage extends BasePage {
   }
 
   async clickLoginButton() {
-    await this.loginButton.click();
+    await clickElement(this.loginButton);
   }
 
   async verifyErrorMessageContains(text: string) {
