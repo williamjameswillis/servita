@@ -2,7 +2,7 @@ import { testUser } from "../support/dataObjects";
 import { apiClient, total_users, users_per_page } from "../support/helpers";
 import { UserModel } from "../support/dataModels";
 
-describe("positive tests", () => {
+describe("Happy Path tests - ", () => {
   it("POST a user and validate the response", async () => {
     const response = await apiClient.post("users", testUser);
     expect(response.status).toBe(201);
@@ -46,7 +46,7 @@ describe("positive tests", () => {
   });
 });
 
-describe("negative tests", () => {
+describe("Sad Path tests - ", () => {
   it("try to GET user that does not exist", async () => {
     const response = await apiClient.get(`users/87264397692376498276`);
     expect(response.status).toBe(404);
