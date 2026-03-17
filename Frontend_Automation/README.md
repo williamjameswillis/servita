@@ -116,7 +116,10 @@ to wait for no network activity before taking the snapshot. i added some extra g
 
 ## Steps to add NFT:accessibility
 
-1 - i have a keen interest in a11y testing so decided to implement automatic checks to a WCAG2.2 AA standard as its very easy with Playwright to do this.
+1 - i have a keen interest in a11y testing so decided to implement automatic checks to a WCAG2.2 AA standard as its very easy with Playwright to do this. Followed <https://playwright.dev/docs/accessibility-testing#creating-a-fixture> so that we can add a11y checks to Playwright test fixture like we did with the POMs
+2 - added a11y checks to the single item test as a demonstration 
+3 - found violations on the inventory page that i accepted - would log a tech debt at this point to address the violations
+4 - pushed that up <>
 
 ## Steps to add NFT:Performance testing
 

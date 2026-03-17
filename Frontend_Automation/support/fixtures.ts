@@ -6,6 +6,12 @@ import { CartPage } from "./pages/cart";
 import { CheckoutStepOnePage } from "./pages/checkoutStepOne";
 import { CheckoutStepTwoPage } from "./pages/checkoutStepTwo";
 import { CheckoutCompletePage } from "./pages/checkoutComplete";
+import AxeBuilder from "@axe-core/playwright";
+import { axeTags } from "./helpers";
+
+interface AxeFixture {
+  makeAxeBuilder: () => AxeBuilder;
+}
 
 interface Pages {
   loginPage: LoginPage;
@@ -17,7 +23,7 @@ interface Pages {
   checkoutCompletePage: CheckoutCompletePage;
 }
 
-export const test = base.extend<Pages>({
+export const test = base.extend<Pages & AxeFixture>({
   loginPage: async ({ page }, use) => {
     await use(new LoginPage(page));
   },
@@ -38,6 +44,10 @@ export const test = base.extend<Pages>({
   },
   checkoutCompletePage: async ({ page }, use) => {
     await use(new CheckoutCompletePage(page));
+  },
+  makeAxeBuilder: async ({ page }, use) => {
+    const makeAxeBuilder = () => new AxeBuilder({ page }).withTags(axeTags);
+    await use(makeAxeBuilder);
   },
 });
 

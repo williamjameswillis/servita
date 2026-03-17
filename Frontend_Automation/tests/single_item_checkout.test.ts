@@ -1,4 +1,5 @@
-import { test } from "../support/fixtures";
+import { expect, test } from "../support/fixtures";
+import { inventoryPageA11yViolations } from "../support/helpers";
 import { loginCredentials } from "../support/loginCredentials";
 import { ProductModel } from "../support/models";
 import { createCheckOutInformation } from "../support/testDataFactory";
@@ -11,7 +12,9 @@ test.describe("Single Item Checkout - ", () => {
     checkoutStepOnePage,
     checkoutStepTwoPage,
     checkoutCompletePage,
+    makeAxeBuilder,
   }) => {
+    let axeResults;
     const products: ProductModel[] = [
       {
         code: "sauce-labs-backpack",
@@ -25,6 +28,8 @@ test.describe("Single Item Checkout - ", () => {
 
     await loginPage.enterUsername(loginCredentials.standardUser.username);
     await loginPage.enterPassword(loginCredentials.standardUser.password);
+    axeResults = await makeAxeBuilder().analyze();
+    expect(axeResults.violations).toEqual([]);
     await loginPage.clickLoginButton();
 
     await inventoryPage.verifyProductsTitleDisplayed();
@@ -36,11 +41,17 @@ test.describe("Single Item Checkout - ", () => {
 
     await inventoryPage.clickAddToCartButtonFor(products);
     await inventoryPage.verifyCartBadgeCount(1, true);
+
+    // i would log a tech debt ticket to address the known a11y violations on inventory page
+    axeResults = await makeAxeBuilder().analyze();
+    expect(axeResults.violations).toEqual(inventoryPageA11yViolations);
     await inventoryPage.clickCart();
 
     await cartPage.verifyCartTitleDisplayed();
     await cartPage.verifyCartItemsCount(1);
     await cartPage.verifyCartContainsItem(products);
+    axeResults = await makeAxeBuilder().analyze();
+    expect(axeResults.violations).toEqual([]);
     await cartPage.clickCheckoutButton();
 
     await checkoutStepOnePage.verifyCheckoutTitleDisplayed();
@@ -48,6 +59,8 @@ test.describe("Single Item Checkout - ", () => {
     await checkoutStepOnePage.enterFirstName(checkOutInfo.firstName);
     await checkoutStepOnePage.enterLastName(checkOutInfo.lastName);
     await checkoutStepOnePage.enterPostalCode(checkOutInfo.postCode);
+    axeResults = await makeAxeBuilder().analyze();
+    expect(axeResults.violations).toEqual([]);
     await checkoutStepOnePage.clickContinueButton();
 
     await checkoutStepTwoPage.verifyCheckoutTitleDisplayed();
@@ -56,11 +69,14 @@ test.describe("Single Item Checkout - ", () => {
     await checkoutStepTwoPage.verifySubtotal(products);
     await checkoutStepTwoPage.verifyTax(products);
     await checkoutStepTwoPage.verifyTotal(products);
-
+    axeResults = await makeAxeBuilder().analyze();
+    expect(axeResults.violations).toEqual([]);
     await checkoutStepTwoPage.clickFinishButton();
 
     await checkoutCompletePage.verifyCheckoutCompleteTitleDisplayed();
     await checkoutCompletePage.verifyCheckoutCompleteMessageDisplayed();
+    axeResults = await makeAxeBuilder().analyze();
+    expect(axeResults.violations).toEqual([]);
     await checkoutCompletePage.clickBackHomeButton();
 
     await inventoryPage.verifyProductsTitleDisplayed();

@@ -40,7 +40,7 @@
     - img "Sauce Labs Onesie"
   - link "Sauce Labs Onesie":
     - /url: "#"
-  - text: Rib snap infant onesie for the junior automation engineer in development. Reinforced 3-snap bottom closure, two-needle hemmed sleeved and bottom won't unravel. $6
+  - text: /Rib snap infant onesie for the junior automation engineer in development\. Reinforced 3-snap bottom closure, two-needle hemmed sleeved and bottom won't unravel\. \$\d+\.\d+/
   - button "Add to cart"
   - link "Test.allTheThings() T-Shirt (Red)":
     - /url: "#"
