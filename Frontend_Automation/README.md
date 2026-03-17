@@ -16,7 +16,7 @@
 - node 24 LTS or newer running locally
 - from a terminal cd into Frontend_Automation
 - run `npm i` to install the node dependencies
-- run `npm run test` to execute the API test suite locally (note this will be headless so no browser will visibly launch - if you want to see the browser execute the test OR use the playwright ui use `test:headed` or `test:ui` respectively)
+- run `npm run test` to execute the Frontend UI test suite locally (note this will be headless so no browser will visibly launch - if you want to see the browser execute the test OR use the playwright ui use `test:headed` or `test:ui` respectively)
 - once the tests finish executing it should automatically open a report in your default browser
 
 ## Guidance and AI

@@ -1,5 +1,6 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import { BasePage } from "./base";
+import { clickElement, fillInput } from "../helpers";
 
 export class CheckoutStepOnePage extends BasePage {
   readonly checkoutTitle: Locator;
@@ -25,18 +26,18 @@ export class CheckoutStepOnePage extends BasePage {
   }
 
   async enterFirstName(firstName: string) {
-    await this.firstNameInput.fill(firstName);
+    await fillInput(this.firstNameInput, firstName);
   }
 
   async enterLastName(lastName: string) {
-    await this.lastNameInput.fill(lastName);
+    await fillInput(this.lastNameInput, lastName);
   }
 
   async enterPostalCode(postalCode: string) {
-    await this.postalCodeInput.fill(postalCode);
+    await fillInput(this.postalCodeInput, postalCode);
   }
 
   async clickContinueButton() {
-    await this.continueButton.click();
+    await clickElement(this.continueButton);
   }
 }

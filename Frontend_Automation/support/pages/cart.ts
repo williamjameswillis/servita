@@ -1,6 +1,7 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import { BasePage } from "./base";
 import { ProductModel } from "../models";
+import { clickElement } from "../helpers";
 
 export class CartPage extends BasePage {
   readonly cartTitle: Locator;
@@ -48,10 +49,10 @@ export class CartPage extends BasePage {
     const cartItemRemoveButton = this.page.locator(
       `[data-test='remove-${itemCode}']`,
     );
-    await cartItemRemoveButton.click();
+    await clickElement(cartItemRemoveButton);
   }
 
   async clickCheckoutButton() {
-    await this.checkoutButton.click();
+    await clickElement(this.checkoutButton);
   }
 }

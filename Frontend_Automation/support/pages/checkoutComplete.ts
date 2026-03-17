@@ -32,6 +32,6 @@ export class CheckoutCompletePage extends BasePage {
   }
 
   async clickBackHomeButton() {
-    clickElement(this.backHomeButton);
+    await clickElement(this.backHomeButton);
   }
 }

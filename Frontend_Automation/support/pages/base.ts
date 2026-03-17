@@ -7,10 +7,6 @@ export class BasePage {
   readonly shoppingCartBadge: Locator;
   readonly pageTitle: Locator;
   readonly menuButton: Locator;
-  readonly twitterLink: Locator;
-  readonly facebookLink: Locator;
-  readonly linkedInLink: Locator;
-  readonly footer: Locator;
   readonly fullPage: Locator;
 
   constructor(page: Page) {
@@ -19,10 +15,6 @@ export class BasePage {
     this.shoppingCartBadge = page.locator("[data-test='shopping-cart-badge']");
     this.menuButton = page.getByText("Open Menu");
     this.pageTitle = page.getByText("Swag Labs");
-    this.twitterLink = page.locator("social-twitter");
-    this.facebookLink = page.locator("social-facebook");
-    this.linkedInLink = page.locator("social-linkedin");
-    this.footer = page.locator("footer-copy");
     this.fullPage = page.locator("html");
   }
 
@@ -58,22 +50,6 @@ export class BasePage {
 
   async verifyPageTitleDisplayed() {
     await expect(this.pageTitle).toBeVisible();
-  }
-
-  async clickTwitterLink() {
-    await clickElement(this.twitterLink);
-  }
-
-  async clickFacebookLink() {
-    await clickElement(this.facebookLink);
-  }
-
-  async clickLinkedInLink() {
-    await clickElement(this.linkedInLink);
-  }
-
-  async verifyFooterDisplayed() {
-    await expect(this.footer).toBeVisible();
   }
 
   async verifySessionCookieExistsForUser(username: string) {
