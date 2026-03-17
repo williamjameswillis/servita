@@ -128,7 +128,11 @@ export class BasePage {
    * Delete the snapshot file and re-run to regenerate it.
    */
   async checkUIMatchesSnapshot() {
-    await this.page.waitForLoadState("networkidle");
+    await this.page.waitForLoadState("load");
+    await this.page.waitForLoadState("domcontentloaded");
+
+    await this.fullPage.waitFor({ state: "attached" });
+    await this.fullPage.waitFor({ state: "visible" });
     await expect(this.fullPage).toMatchAriaSnapshot();
   }
 }
