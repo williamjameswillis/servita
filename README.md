@@ -2,8 +2,6 @@
 
 Asked to create an API and Frontend test automation solution for <https://reqres.in/> and <https://www.saucedemo.com/> respectively.
 
-First tackled the API test solution as there was a question over tooling for the Frontend part. Then once the tooling query for the Frontend was answered I tackled that.
-
 I have documented most of my thought processes, decision making, online resources and AI usage in the directory READMEs linked below in sections that start `Steps to`.
 
 ## Clone Repo Instructions
