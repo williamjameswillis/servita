@@ -1,4 +1,4 @@
-import { UserModel } from "./dataModels";
+import { RegistrationModel, UserModel } from "./dataModels";
 
 export const testUser: UserModel = {
   name: "William Willis",
@@ -10,4 +10,9 @@ export const testUser: UserModel = {
     last_name: "Willis",
     avatar: "https://example.com/avatar.jpg",
   },
+};
+
+export const registrationDetails: RegistrationModel = {
+  email: "eve.holt@reqres.in",
+  password: "pistol",
 };

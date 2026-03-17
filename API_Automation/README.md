@@ -1,6 +1,7 @@
 # API Automation
 
 API endpoint - <https://reqres.in/>
+openAPI spec <https://reqres.in/api-docs#>
 
 ## Tooling
 
@@ -19,6 +20,7 @@ API endpoint - <https://reqres.in/>
 
 ## Guidance and AI
 
+- used the api-docs OAS Spec to view the various api endpoints
 - online guide part followed - <https://medium.com/codingmountain-blog/setting-up-jest-in-typescript-a-step-by-step-guide-baeac91f4b0a>
 - AI agent to assist when i got stuck - Claude Sonnet 4.6
 

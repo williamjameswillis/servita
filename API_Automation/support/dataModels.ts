@@ -16,7 +16,7 @@ export interface UserModel {
   meta?: UserMetaModel;
 }
 
-export interface UserDataModel {
+interface UserDataModel {
   id?: string;
   email?: string;
   first_name?: string;
@@ -43,4 +43,9 @@ interface UserMetaModel {
 interface UserCTAModel {
   label: string;
   url: string;
+}
+
+export interface RegistrationModel {
+  email: string;
+  password: string;
 }
