@@ -4,15 +4,23 @@ API endpoint - <https://reqres.in/>
 
 ## Tooling
 
-jest
-typescript
-axios - (explain why I chose axios over fetch)
-(see API_Automation/package.json for further details)
+- jest
+- typescript
+- axios - (explain why I chose axios over fetch)
+- (see API_Automation/package.json for further details of packages)
+
+## Install Requirements to run locally
+
+- node 24 LTS or newer running locally
+- from a terminal cd into API_Automation
+- run `npm i` to install the node dependencies
+- run `npm run test` to execute the API test suite locally
+- once the tests finish executing it should automatically open a report in your default browser
 
 ## Guidance and AI
 
-online guide part followed - <https://medium.com/codingmountain-blog/setting-up-jest-in-typescript-a-step-by-step-guide-baeac91f4b0a>
-AI agent to assist when i got stuck - Claude Sonnet 4.6
+- online guide part followed - <https://medium.com/codingmountain-blog/setting-up-jest-in-typescript-a-step-by-step-guide-baeac91f4b0a>
+- AI agent to assist when i got stuck - Claude Sonnet 4.6
 
 ## Steps to setup project
 

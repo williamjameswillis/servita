@@ -1,4 +1,26 @@
-# Frontend Automation§
+# Frontend Automation
+
+Web Application endpoint - <https://www.saucedemo.com>
+
+## Tooling
+
+- playwright
+- typescript
+- faker
+- (see Frontend_Automation/package.json for further details)
+
+## Install Requirements to run locally
+
+- node 24 LTS or newer running locally
+- from a terminal cd into Frontend_Automation
+- run `npm i` to install the node dependencies
+- run `npm run test` to execute the API test suite locally (note this will be headless so no browser will visibly launch - if you want to see the browser execute the test OR use the playwright ui use `test:headed` or `test:ui` respectively)
+- once the tests finish executing it should automatically open a report in your default browser
+
+## Guidance and AI
+
+- online guides called out in steps below
+- AI agent to assist when i got stuck - Claude Sonnet 4.6
 
 ## Steps to setup project
 
@@ -119,7 +141,7 @@ to wait for no network activity before taking the snapshot. i added some extra g
 1 - i have a keen interest in a11y testing so decided to implement automatic checks to a WCAG2.2 AA standard as its very easy with Playwright to do this. Followed <https://playwright.dev/docs/accessibility-testing#creating-a-fixture> so that we can add a11y checks to Playwright test fixture like we did with the POMs
 2 - added a11y checks to the single item test as a demonstration 
 3 - found violations on the inventory page that i accepted - would log a tech debt at this point to address the violations
-4 - pushed that up <>
+4 - pushed that up <https://github.com/williamjameswillis/servita/actions/runs/23198181325>
 
 ## Steps to add NFT:Performance testing
 
