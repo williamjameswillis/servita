@@ -1,6 +1,8 @@
 # Frontend Automation
 
-Web Application endpoint - <https://www.saucedemo.com>
+## Target Application
+
+- Web Application endpoint - <https://www.saucedemo.com>
 
 ## Tooling
 

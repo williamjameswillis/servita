@@ -1,7 +1,9 @@
 # API Automation
 
-API endpoint - <https://reqres.in/>
-openAPI spec <https://reqres.in/api-docs#>
+## Target API
+
+- API endpoint - <https://reqres.in/>
+- openAPI spec for this API <https://reqres.in/api-docs#>
 
 ## Tooling
 

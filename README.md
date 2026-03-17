@@ -1,10 +1,14 @@
 # servita
 
-Asked to create an API and Frontend test automation solutions for <https://reqres.in/> and <https://www.saucedemo.com/> respectively.
+Asked to create an API and Frontend test automation solution for <https://reqres.in/> and <https://www.saucedemo.com/> respectively.
 
 First tackled the API test solution as there was a question over tooling for the Frontend part. Then once the tooling query for the Frontend was answered I tackled that.
 
 I have documented most of my thought processes, decision making, online resources and AI usage in the directory READMEs linked below in sections that start `Steps to`.
+
+## Clone Repo Instructions
+
+From a terminal cd into desired directory then run `git clone https://github.com/williamjameswillis/servita`.
 
 ## part 1 - Frontend Automation
 
